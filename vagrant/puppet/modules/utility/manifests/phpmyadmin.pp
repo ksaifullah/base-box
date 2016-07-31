@@ -1,4 +1,4 @@
-class amp::phpmyadmin {
+class utility::phpmyadmin {
 
   package
   {
