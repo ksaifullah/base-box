@@ -82,20 +82,22 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
 
+  # config.vm.provision "shell", path: "vagrant/scripts/install-config.sh", name: "Copy config files"
+
   # @see https://rvm.io/integration/vagrant
-  config.vm.provision "shell", path: "vagrant/scripts/install-rvm.sh", args: "stable", privileged: false, name: "install ruby version manager stable"
-  config.vm.provision "shell", path: "vagrant/scripts/install-ruby.sh", args: "2.3.0", privileged: false, name: "install ruby"
+  # We managed some puppet code to install RVM and Ruby.
+  # config.vm.provision "shell", path: "vagrant/scripts/install-rvm.sh", args: "stable", privileged: false, name: "install ruby version manager stable"
+  # config.vm.provision "shell", path: "vagrant/scripts/install-ruby.sh", args: "2.3.0", privileged: false, name: "install ruby"
 
-  config.vm.provision "shell", path: "vagrant/scripts/install-puppet.sh", name: "install puppet"
-  # config.vm.provision "shell", path: "vagrant/scripts/install-puppet-apache.sh", name: "install puppet apache module"
-  config.vm.provision "shell", path: "vagrant/scripts/install-puppet-module.sh", args: "puppetlabs-apache", name: "install puppet module"
-  config.vm.provision "shell", path: "vagrant/scripts/install-puppet-module.sh", args: "mayflower-php", name: "install puppet module"
-  config.vm.provision "shell", path: "vagrant/scripts/install-puppet-module.sh", args: "maestrodev-rvm", name: "install puppet module"
+  # config.vm.provision "shell", path: "vagrant/scripts/install-puppet.sh", name: "install puppet"
+  # config.vm.provision "shell", path: "vagrant/scripts/install-puppet-module.sh", args: "puppetlabs-apache", name: "install puppetlabs-apache"
+  # config.vm.provision "shell", path: "vagrant/scripts/install-puppet-module.sh", args: "mayflower-php", name: "install mayflower-php"
+  # config.vm.provision "shell", path: "vagrant/scripts/install-puppet-module.sh", args: "maestrodev-rvm", name: "maestrodev-rvm"
 
-  # config.vm.provision "puppet" do |puppet|
-  #   puppet.manifests_path = "vagrant/puppet/manifests"
-  #   puppet.module_path = "vagrant/puppet/modules"
-  #   puppet.manifest_file = "site.pp"
-  # end
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "vagrant/puppet/manifests"
+    puppet.module_path = "vagrant/puppet/modules"
+    puppet.manifest_file = "default.pp"
+  end
 
 end
