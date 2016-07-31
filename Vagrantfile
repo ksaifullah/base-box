@@ -35,6 +35,8 @@ Vagrant.configure(2) do |config|
   # your network.
   # config.vm.network "public_network"
   config.vm.network :private_network, ip: "192.168.200.20"
+  config.vm.network :forwarded_port, guest: 80, host: 8070
+
   config.vm.hostname                    = hostname
 
   config.hostmanager.enabled            = true
